@@ -5,7 +5,6 @@ val azureAdClient = "0.0.7"
 val jacksonVersion = "2.14.1"
 val logbackEncoderVersion = "7.2"
 val postgresqlVersion = "42.5.1"
-val flywayCoreVersion = "9.15.1"
 val springKafkaTestVersion = "3.0.4"
 val springCloudContractVersion = "4.0.1"
 val testcontainersVersion = "1.17.6"
@@ -36,7 +35,6 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework:spring-aspects")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     // Internal libraries
     implementation("no.nav.pensjon.opptjening:omsorgsopptjening-domene-lib:$domeneVersion")
     // Kotlin
