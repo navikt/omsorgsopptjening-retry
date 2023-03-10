@@ -1,0 +1,4 @@
+OMSORGSOPPTJENING_TOPIC: omsorgsopptjening
+OMSORGSOPPTJENING_RETRY_GROUP_ID: testgruppe
+kafka:
+  brokers: ${spring.embedded.kafka.brokers}
