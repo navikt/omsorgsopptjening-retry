@@ -21,7 +21,7 @@ class OmsorgsarbeidListener(
         containerFactory = "omsorgsArbeidKafkaListenerContainerFactory",
         idIsGroup = false,
         topics = ["\${OMSORGSOPPTJENING_TOPIC}"],
-        groupId = "\${OMSORGSOPPTJENING_BESTEM_GROUP_ID}"
+        groupId = "\${OMSORGSOPPTJENING_RETRY_GROUP_ID}"
     )
     fun consumeOmsorgPGodskriving(
         hendelse: String,
