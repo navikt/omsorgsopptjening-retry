@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component
 @Component
 class OmsorgsarbeidListener(
     registry: MeterRegistry,
-    val omsorgsOpptjeningProducer: OmsorgsOpptjeningProducer) {
+    val omsorgsOpptjeningProducer: OmsorgsOpptjeningProducer
+) {
 
     private val antallLesteMeldinger = registry.counter("omsorgsArbeidListener", "antall", "lest")
 
@@ -40,5 +41,4 @@ class OmsorgsarbeidListener(
     companion object {
         private val SECURE_LOG = LoggerFactory.getLogger("secure")
     }
-
 }

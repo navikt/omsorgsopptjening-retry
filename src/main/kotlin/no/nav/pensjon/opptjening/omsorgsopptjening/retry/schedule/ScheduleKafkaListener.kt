@@ -8,15 +8,16 @@ import java.time.LocalTime
 
 
 @Component
-class ScheduleKafkaListener(private val kafkaListenerEndpointRegistry: KafkaListenerEndpointRegistry)
-{
-    @Scheduled(cron = "40 14 * * * *")
+class ScheduleKafkaListener(
+    private val kafkaListenerEndpointRegistry: KafkaListenerEndpointRegistry
+) {
+    @Scheduled(cron = "10 15 * * * *")
     fun startListener() {
         LOGGER.info("Starter omsorgsarbeidListener ${LocalTime.now()}")
         kafkaListenerEndpointRegistry.getListenerContainer("omsorgsarbeidListener")!!.start()
     }
 
-    @Scheduled(cron = "41 14 * * * *")
+    @Scheduled(cron = "11 15 * * * *")
     fun stopListener() {
         LOGGER.info("Starter omsorgsarbeidListener ${LocalTime.now()}")
         kafkaListenerEndpointRegistry.getListenerContainer("omsorgsarbeidListener")!!.stop()
