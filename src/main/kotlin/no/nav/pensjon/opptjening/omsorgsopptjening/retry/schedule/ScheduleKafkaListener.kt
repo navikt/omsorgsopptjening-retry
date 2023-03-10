@@ -11,13 +11,13 @@ import java.time.LocalTime
 class ScheduleKafkaListener(
     private val kafkaListenerEndpointRegistry: KafkaListenerEndpointRegistry
 ) {
-    @Scheduled(cron = "37 15 * * * ?")
+    @Scheduled(cron = "0 39 15 * * ?")
     fun startListener() {
         LOGGER.info("Starter omsorgsarbeidListener ${LocalTime.now()}")
         kafkaListenerEndpointRegistry.getListenerContainer("omsorgsarbeidListener")!!.start()
     }
 
-    @Scheduled(cron = "38 15 * * * ?")
+    @Scheduled(cron = "0 40 15 * * ?")
     fun stopListener() {
         LOGGER.info("Stopper omsorgsarbeidListener ${LocalTime.now()}")
         kafkaListenerEndpointRegistry.getListenerContainer("omsorgsarbeidListener")!!.stop()
