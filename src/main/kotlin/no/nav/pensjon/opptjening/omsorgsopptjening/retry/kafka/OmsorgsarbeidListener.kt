@@ -18,7 +18,7 @@ class OmsorgsarbeidListener(
 
     @KafkaListener(
         id = "omsorgsarbeidListener",
-        autoStartup = "true",
+        autoStartup = "false",
         containerFactory = "omsorgsArbeidKafkaListenerContainerFactory",
         idIsGroup = false,
         topics = ["\${OMSORGSOPPTJENING_TOPIC}"],
@@ -31,12 +31,11 @@ class OmsorgsarbeidListener(
     ) {
         antallLesteMeldinger.increment()
         SECURE_LOG.info("Konsumerer omsorgsmelding: ${consumerRecord.key()}, ${consumerRecord.value()}")
-        acknowledgment.acknowledge()
 
         if (consumerRecord.kafkaMessageType() == KafkaMessageType.RETRY) {
-         //   omsorgsOpptjeningProducer.publiserOmsorgsopptejning(consumerRecord)
+            omsorgsOpptjeningProducer.publiserOmsorgsopptejning(consumerRecord)
         }
-      //  acknowledgment.acknowledge()
+        acknowledgment.acknowledge()
     }
 
     companion object {
