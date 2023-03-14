@@ -18,7 +18,7 @@ class OmsorgsarbeidListener(
 
     @KafkaListener(
         id = "omsorgsarbeidListener",
-        autoStartup = "false",
+        autoStartup = "true",
         containerFactory = "omsorgsArbeidKafkaListenerContainerFactory",
         idIsGroup = false,
         topics = ["\${OMSORGSOPPTJENING_TOPIC}"],
