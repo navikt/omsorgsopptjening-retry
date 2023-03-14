@@ -5,6 +5,7 @@ import no.nav.pensjon.opptjening.omsorgsopptjening.felles.domene.kafka.KafkaMess
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.header.internals.RecordHeader
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Component
@@ -18,12 +19,13 @@ class OmsorgsOpptjeningProducer(
 ) {
 
     fun publiserOmsorgsopptejning(consumerRecord: ConsumerRecord<String, String>) {
-        send(consumerRecord.key(), consumerRecord.value())
+        send(consumerRecord)
     }
 
-    fun send(key: String, value: String) {
-        val record = ProducerRecord(omsorgsOpptjeningTopic, null, null, key, value, createHeaders())
+    fun send(consumerRecord: ConsumerRecord<String, String>) {
+        val record = ProducerRecord(omsorgsOpptjeningTopic, null, null, consumerRecord.key(), consumerRecord.value(), createHeaders())
         kafkaTemplate.send(record).get(1, TimeUnit.SECONDS)
+        LOGGER.info("Produserte retry melding for melding med hash: ${consumerRecord.hashCode()}")
     }
 
     private fun createHeaders() = mutableListOf(
@@ -32,4 +34,8 @@ class OmsorgsOpptjeningProducer(
             KafkaMessageType.OMSORGSARBEID.name.encodeToByteArray()
         )
     )
+
+    companion object {
+        private val LOGGER = LoggerFactory.getLogger(OmsorgsOpptjeningProducer::class.java)
+    }
 }
